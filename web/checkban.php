@@ -2,9 +2,12 @@
 session_start();
 include('database.php');
 
-$data = json_decode(file_get_contents("php://input"), true);
-if ($data) {
-	$identifier = json_decode($data['identifier'], true);
+if($_SERVER['CONTENT_TYPE'] === 'application/json') {
+	$_POST = json_decode(file_get_contents('php://input'));
+}
+
+if ($_POST) {
+	$identifier = json_decode($_POST['identifier'], true);
 	$index = 0;
 	$search = '';
 
